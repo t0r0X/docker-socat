@@ -7,7 +7,7 @@ echo "docker-proxy: ${SOCAT_ALLOW}" > ~/socat.allow
 echo "docker-proxy: ${SOCAT_DENY}" > ~/socat.deny
 
 if [[ -z "${SOCAT_ADDRESS_1}" || -z "${SOCAT_ADDRESS_2}" ]] ; then
-    echo 'ERROR: $0: need two addresses!'
+    echo "ERROR: $0: need two addresses as parameters!"
     exit 1
 fi
 
