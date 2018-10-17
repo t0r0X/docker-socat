@@ -8,6 +8,6 @@ USER root
 
 VOLUME /var/run/docker.sock
 
-COPY launch.sh .
+COPY launch.sh /root
 
-ENTRYPOINT ["launch.sh"]
+ENTRYPOINT [ 'bash', '/root/launch.sh' ]
