@@ -8,7 +8,6 @@ USER root
 
 VOLUME /var/run/docker.sock
 
-ENTRYPOINT ["socat"]
+COPY launch.sh .
 
-# TODO work in progress
-CMD ["-h"]
+ENTRYPOINT ["launch.sh"]
