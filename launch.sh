@@ -2,11 +2,11 @@
 
 # Create TCP wrapper file for ALLOW
 [[ -n "${SOCAT_ALLOW}" ]] || SOCAT_ALLOW=ALL
-echo "docker-proxy: ${SOCAT_ALLOW}" > ~/socat.allow
+echo "socat-proxy: ${SOCAT_ALLOW}" > ~/socat.allow
 
 # Create TCP wrapper file for DENY
-[[ -n "${SOCAT_DENY}" ]] || SOCAT_DENY=
-echo "docker-proxy: ${SOCAT_DENY}" > ~/socat.deny
+[[ -n "${SOCAT_DENY}" ]] || SOCAT_DENY=NONE
+echo "socat-proxy: ${SOCAT_DENY}" > ~/socat.deny
 
 # Validate source and target addresses
 if [[ -z "${SOCAT_ADDRESS_SRC}" || -z "${SOCAT_ADDRESS_TGT}" ]] ; then
@@ -15,4 +15,4 @@ if [[ -z "${SOCAT_ADDRESS_SRC}" || -z "${SOCAT_ADDRESS_TGT}" ]] ; then
 fi
 
 # Run socat command line
-socat ${SOCAT_OPTS} "${SOCAT_ADDRESS_SRC}" "${SOCAT_ADDRESS_TGT}"
+socat ${SOCAT_OPTS} "${SOCAT_ADDRESS_SRC}" "${SOCAT_ADDRESS_TGT},tcpwrap=socat-proxy,allow-table=~/socat.allow,deny-table=~/socat.deny"
