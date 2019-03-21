@@ -6,8 +6,10 @@ RUN install_packages socat
 
 USER root
 
+EXPOSE 4550/tcp
+
 VOLUME /var/run/docker.sock
 
 COPY launch.sh /root
 
-ENTRYPOINT [ "bash", "/root/launch.sh" ]
+ENTRYPOINT [ "bash", "-x", "/root/launch.sh" ]
