@@ -6,9 +6,6 @@ RUN install_packages socat
 
 USER root
 
-VOLUME /var/run/docker.sock
+COPY launch.sh /root
 
-ENTRYPOINT ["socat"]
-
-# TODO work in progress
-CMD ["-h"]
+ENTRYPOINT [ "bash", "-x", "/root/launch.sh" ]
