@@ -18,4 +18,4 @@ echo "socat-proxy: ${SOCAT_DENY}" > ~/socat.deny
 [[ -z "${SOCAT_TGT}" ]] && SOCAT_TGT='TCP4-LISTEN:4550,fork'
 
 # Run socat command line
-socat ${SOCAT_OPTS} "${SOCAT_SRC}" "${SOCAT_TGT},tcpwrap=socat-proxy,allow-table=~/socat.allow,deny-table=~/socat.deny"
+exec socat ${SOCAT_OPTS} "${SOCAT_SRC}" "${SOCAT_TGT},tcpwrap=socat-proxy,allow-table=~/socat.allow,deny-table=~/socat.deny"
