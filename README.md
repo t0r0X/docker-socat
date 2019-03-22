@@ -1,6 +1,7 @@
 Docker image running socat, based on minideb, with flexible configuration options, and TCP wrapper based access filtering.
 
 Environment variables:
+* SOCAT_DEBUG: enable shell script debug output, optional
 * SOCAT_ALLOW: TCP wrapper expression, optional, default = 'ALL'
 * SOCAT_DENY: TCP wrapper expression, optional, default = 'NONE'
 * SOCAT_SRC: socat source address (what to export)
