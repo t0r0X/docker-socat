@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Enable script debug output
+[[ "${SOCAT_DEBUG}" = "true" ]] && set -x
+
 # Create TCP wrapper file for ALLOW
 [[ -n "${SOCAT_ALLOW}" ]] || SOCAT_ALLOW=ALL
 echo "socat-proxy: ${SOCAT_ALLOW}" > ~/socat.allow
