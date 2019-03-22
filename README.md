@@ -1,4 +1,4 @@
-Docker image based on minideb (Debian) for running `socat`, with flexible configuration options, TCP wrapper based access filtering and reasonable defaults exporting the Docker Unix socket '/var/run/docker.sock' on port 4550.
+Docker image based on minideb (Debian) for running `socat`, with flexible configuration options, TCP wrapper based access filtering and reasonable defaults exporting the Docker Unix domain socket `/var/run/docker.sock` on port 4550.
 
 Environment variables:
 * SOCAT_DEBUG: enable shell script debug output if value is 'true'.
