@@ -8,4 +8,4 @@ USER root
 
 COPY launch.sh /root
 
-ENTRYPOINT [ "bash", "-x", "/root/launch.sh" ]
+ENTRYPOINT [ "bash", "/root/launch.sh" ]
