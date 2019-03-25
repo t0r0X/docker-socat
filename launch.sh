@@ -17,5 +17,8 @@ echo "socat-proxy: ${SOCAT_DENY}" > /root/socat.deny
 [[ -z "${SOCAT_SRC}" ]] && SOCAT_SRC='unix-connect:/var/run/docker.sock'
 [[ -z "${SOCAT_TGT}" ]] && SOCAT_TGT='TCP4-LISTEN:4550,fork'
 
+TCPWRAP_OPTS=',tcpwrap=socat-proxy,allow-table=/root/socat.allow,deny-table=/root/socat.deny'
+[[ -z "${SOCAT_TCPWRAP_OFF}" = "true" ]] && TCPWRAP_OPTS=''
+
 # Run socat command line
-exec socat ${SOCAT_OPTS} "${SOCAT_SRC}" "${SOCAT_TGT},tcpwrap=socat-proxy,allow-table=/root/socat.allow,deny-table=/root/socat.deny"
+exec socat ${SOCAT_OPTS} "${SOCAT_SRC}" "${SOCAT_TGT}${TCPWRAP_OPTS}"
