@@ -14,8 +14,11 @@ fi
 echo "socat-proxy: ${SOCAT_DENY}" > /root/socat.deny
 
 # Reasonable defaults for source and target addresses regarding Docker Unix domain socket
-[[ -z "${SOCAT_SRC}" ]] && SOCAT_SRC='unix-connect:/var/run/docker.sock'
-[[ -z "${SOCAT_TGT}" ]] && SOCAT_TGT='TCP4-LISTEN:4550,fork,reuseaddr'
+[[ -z "${SOCAT_SRC}" ]] && SOCAT_SRC='TCP4-LISTEN:4550,fork,reuseaddr'
+[[ -z "${SOCAT_TGT}" ]] && SOCAT_TGT='unix-connect:/var/run/docker.sock'
+
+TCPWRAP_OPTS=',tcpwrap=socat-proxy,allow-table=/root/socat.allow,deny-table=/root/socat.deny'
+[[ "${SOCAT_NO_DEFAULT_TCPWRAP}" = "true" ]] && TCPWRAP_OPTS=''
 
 # Run socat command line
-exec socat ${SOCAT_OPTS} "${SOCAT_SRC}" "${SOCAT_TGT},tcpwrap=socat-proxy,allow-table=/root/socat.allow,deny-table=/root/socat.deny"
+exec socat ${SOCAT_OPTS} "${SOCAT_SRC}${TCPWRAP_OPTS}" "${SOCAT_TGT}"
